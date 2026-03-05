@@ -12,7 +12,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "vitest",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@upstash/redis": "^1.36.3",
