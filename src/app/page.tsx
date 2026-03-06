@@ -121,9 +121,17 @@ export default function Home() {
       } else if (data.remaining) {
         // Clock skew mitigation
         setGuessEndTime(Date.now() + data.remaining * 1000);
+      } else {
+        // in case of multi-tab/desync
+        console.warn("No active guess found on server. Resetting local state.");
+        setActiveGuess(null);
+        setGuessEndTime(null);
       }
     } catch (error) {
       console.error("Failed to resolve guess", error);
+      // Reset state on network failure to prevent a permanent "Loading" hang
+      setActiveGuess(null);
+      setGuessEndTime(null);
     }
   };
 
@@ -196,7 +204,7 @@ export default function Home() {
                 <button
                   data-testid="guess-up-button"
                   onClick={() => handleGuess("up")}
-                  disabled={!price || isGuessing}
+                  disabled={!price || isGuessing || !!activeGuess}
                   className="bg-green-600 hover:bg-green-500 text-white font-bold py-3 px-8 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed w-32"
                 >
                   {isGuessing ? "..." : "UP 📈"}
@@ -204,7 +212,7 @@ export default function Home() {
                 <button
                   data-testid="guess-down-button"
                   onClick={() => handleGuess("down")}
-                  disabled={!price || isGuessing}
+                  disabled={!price || isGuessing || !!activeGuess}
                   className="bg-red-600 hover:bg-red-500 text-white font-bold py-3 px-8 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed w-32"
                 >
                   {isGuessing ? "..." : "DOWN 📉"}
