@@ -1,6 +1,6 @@
 export async function getBtcSpotPrice(): Promise<number> {
   try {
-    // Next.js specific: { cache: 'no-store' } ensures we bypass the CDN cache.
+    // { cache: 'no-store' } ensures we bypass the CDN cache.
     // We need the live price at the exact millisecond the user clicks "Guess".
     const response = await fetch(
       "https://api.coinbase.com/v2/prices/BTC-USD/spot",

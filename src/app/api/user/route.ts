@@ -8,13 +8,13 @@ export async function GET(req: NextRequest) {
   try {
     const score = (await redis.get<number>(`user:${userId}:score`)) ?? 0;
 
-    // NEW: Fetch any active guess the user might have locked in
+    // Fetch any active guess the user might have locked in
     const activeGuess = await redis.get(`guess:${userId}`);
 
     return NextResponse.json({
       userId,
       score,
-      activeGuess, // Pass it to the frontend
+      activeGuess,
     });
   } catch (error) {
     console.error("[User Error]:", error);

@@ -44,7 +44,7 @@ export function useCoinbaseWebsocket() {
       setStatus("closed");
     };
 
-    // Staff Move: Always clean up connections to prevent zombie sockets on unmount
+    // Clean up connections to prevent zombie sockets on unmount
     return () => {
       if (ws.current && ws.current.readyState === WebSocket.OPEN) {
         ws.current.close();

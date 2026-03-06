@@ -100,6 +100,7 @@ export default function Home() {
         alert(data.error || "Failed to place guess");
       }
     } catch (error) {
+      console.error("[Guess Action Error]:", error);
       alert("Network error while placing guess.");
     } finally {
       setIsGuessing(false);
@@ -159,7 +160,7 @@ export default function Home() {
         </div>
 
         {/* Game State UI */}
-        <div className="min-h-[150px] flex flex-col justify-center">
+        <div className="min-h-37.5 flex flex-col justify-center">
           {activeGuess ? (
             <div className="space-y-4">
               <p className="text-lg">
