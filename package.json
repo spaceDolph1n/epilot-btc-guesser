@@ -1,6 +1,6 @@
 {
   "name": "epilot-btc-guesser",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Real-time BTC price guessing app built for epilot.",
   "author": "Tiago Rodrigues",
   "engines": {
